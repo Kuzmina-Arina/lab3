@@ -1,0 +1,9 @@
+com\lab\lab3_2\service\impl\FigureServiceImpl.class
+com\lab\lab3_2\runner\FigureRunner.class
+com\lab\lab3_2\model\Polygon.class
+com\lab\lab3_2\model\Figure.class
+com\lab\lab3_2\model\Triangle.class
+com\lab\lab3_2\service\FigureService.class
+com\lab\lab3_2\ui\ConsoleUI.class
+com\lab\lab3_2\model\Circle.class
+com\lab\lab3_2\Application.class
