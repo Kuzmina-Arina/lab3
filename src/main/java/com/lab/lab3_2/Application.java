@@ -1,6 +1,6 @@
 package com.lab.lab3_2;
 
-import com.lab.lab3_2.runner.FigureRunner;
+import com.lab.lab3_2.ui.ConsoleUI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +21,7 @@ public class Application {
      */
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(Application.class, args);
-        FigureRunner runner = context.getBean(FigureRunner.class);
-        runner.run();
+        ConsoleUI consoleUI = context.getBean(ConsoleUI.class);
+        consoleUI.run();
     }
 }

@@ -1,5 +1,9 @@
 package com.lab.lab3_2.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Абстрактный класс, представляющий геометрическую фигуру.
  *
@@ -71,6 +75,66 @@ public abstract class Figure {
                 + ", Название: " + name
                 + ", Координаты центра: (" + x + ", " + y + ")"
                 + ", Описание: " + description;
+    }
+
+    /**
+     * Находит площади всех фигур.
+     *
+     * @param figures список фигур
+     * @return список площадей
+     */
+    public static List<Double> findAreas(List<Figure> figures) {
+        List<Double> areas = new ArrayList<>();
+        for (Figure figure : figures) {
+            areas.add(figure.getArea());
+        }
+        return areas;
+    }
+
+    /**
+     * Средний периметр фигур с количеством сторон больше 5.
+     *
+     * @param figures список фигур
+     * @return средний периметр или 0
+     */
+    public static double averagePerimeterBigPolygons(List<Figure> figures) {
+        double sum = 0;
+        int count = 0;
+        for (Figure figure : figures) {
+            if (figure.getSideCount() > 5) {
+                sum += figure.getPerimeter();
+                count++;
+            }
+        }
+        return count == 0 ? 0 : sum / count;
+    }
+
+    /**
+     * Сортирует фигуры по возрастанию площади.
+     *
+     * @param figures список фигур
+     * @return отсортированный список
+     */
+    public static List<Figure> sortByArea(List<Figure> figures) {
+        List<Figure> sorted = new ArrayList<>(figures);
+        sorted.sort(Comparator.comparingDouble(Figure::getArea));
+        return sorted;
+    }
+
+    /**
+     * Ищет фигуру по названию.
+     *
+     * @param figures список фигур
+     * @param name    название
+     * @return фигура или null
+     */
+    public static Figure findByName(List<Figure> figures, String name) {
+        for (Figure figure : figures) {
+            if (figure.getName().equalsIgnoreCase(name)) {
+                return figure;
+            }
+        }
+        return null;
     }
 
     /**
