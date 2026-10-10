@@ -8,16 +8,24 @@ package com.lab.lab3_2.model;
  */
 public class Triangle extends Figure {
 
-    /** Количество сторон треугольника. */
+    /**
+     * Количество сторон треугольника.
+     */
     private static final int SIDE_COUNT = 3;
 
-    /** Сторона A. */
+    /**
+     * Сторона A.
+     */
     private double sideA;
 
-    /** Сторона B. */
+    /**
+     * Сторона B.
+     */
     private double sideB;
 
-    /** Сторона C. */
+    /**
+     * Сторона C.
+     */
     private double sideC;
 
     /**
@@ -85,6 +93,45 @@ public class Triangle extends Figure {
                 && sideA + sideB > sideC
                 && sideA + sideC > sideB
                 && sideB + sideC > sideA;
+    }
+
+    /**
+     * Возвращает информацию о параметрах треугольника.
+     *
+     * @return строка со сторонами
+     */
+    @Override
+    public String getParamsInfo() {
+        return "Стороны: A=" + getSideA()
+                + ", B=" + getSideB()
+                + ", C=" + getSideC();
+    }
+
+    /**
+     * Устанавливает сторону A.
+     *
+     * @param sideA новая сторона A
+     */
+    public void setSideA(double sideA) {
+        this.sideA = sideA;
+    }
+
+    /**
+     * Устанавливает сторону B.
+     *
+     * @param sideB новая сторона B
+     */
+    public void setSideB(double sideB) {
+        this.sideB = sideB;
+    }
+
+    /**
+     * Устанавливает сторону C.
+     *
+     * @param sideC новая сторона C
+     */
+    public void setSideC(double sideC) {
+        this.sideC = sideC;
     }
 
     /**

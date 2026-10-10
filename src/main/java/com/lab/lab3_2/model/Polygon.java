@@ -8,25 +8,44 @@ package com.lab.lab3_2.model;
  */
 public class Polygon extends Figure {
 
-    /** Минимальное количество сторон. */
+    /**
+     * Минимальное количество сторон.
+     */
     private static final int MIN_POLYGON_SIDES = 3;
 
-    /** Делитель в формуле шнуровки. */
+    /**
+     * Делитель в формуле шнуровки.
+     */
     private static final double SHOELACE_DIVISOR = 2.0;
 
-    /** Количество сторон. */
+    /**
+     * Количество сторон.
+     */
     private int numberOfSides;
 
-    /** Длины сторон. */
+    /**
+     * Длины сторон.
+     */
     private double[] sideLengths;
 
-    /** Координаты X вершин. */
+    /**
+     * Координаты X вершин.
+     */
     private double[] xCoordinates;
 
-    /** Координаты Y вершин. */
+    /**
+     * Координаты Y вершин.
+     */
     private double[] yCoordinates;
 
-    /** Флаг выпуклости. */
+    /**
+     * Радиус описанной окружности.
+     */
+    private double radius;
+
+    /**
+     * Флаг выпуклости.
+     */
     private boolean isConvex;
 
     /**
@@ -42,17 +61,19 @@ public class Polygon extends Figure {
      * @param xCoordinates  X вершин
      * @param yCoordinates  Y вершин
      * @param isConvex      флаг выпуклости
+     * @param radius        радиус описанной окружности
      */
     public Polygon(int id, String name, double x, double y,
                    String description, int numberOfSides,
                    double[] sideLengths, double[] xCoordinates,
-                   double[] yCoordinates, boolean isConvex) {
+                   double[] yCoordinates, boolean isConvex, double radius) {
         super(id, name, x, y, description);
         this.numberOfSides = numberOfSides;
         this.sideLengths = sideLengths;
         this.xCoordinates = xCoordinates;
         this.yCoordinates = yCoordinates;
         this.isConvex = isConvex;
+        this.radius = radius;
     }
 
     /**
@@ -75,7 +96,7 @@ public class Polygon extends Figure {
     }
 
     /**
-     * Периметр.
+     * Вычисляет периметр.
      *
      * @return периметр
      */
@@ -89,7 +110,7 @@ public class Polygon extends Figure {
     }
 
     /**
-     * Количество сторон.
+     * Возвращает количество сторон.
      *
      * @return количество сторон
      */
@@ -99,7 +120,7 @@ public class Polygon extends Figure {
     }
 
     /**
-     * Проверка корректности.
+     * Проверяет корректность многоугольника.
      *
      * @return true, если корректно
      */
@@ -114,10 +135,72 @@ public class Polygon extends Figure {
     }
 
     /**
-     * Пересчёт координат (заглушка).
+     * Возвращает информацию о параметрах многоугольника.
+     *
+     * @return строка с параметрами
      */
-    public void calculateByCoordinates() {
-        // логика может быть расширена
+    @Override
+    public String getParamsInfo() {
+        return "Сторон: " + getNumberOfSides()
+                + ", Радиус описанной: " + getRadius()
+                + ", Выпуклый: " + (isConvex() ? "да" : "нет");
+    }
+
+    /**
+     * Устанавливает количество сторон
+     * и пересчитывает координаты вершин и длины сторон.
+     *
+     * @param numberOfSides новое количество сторон
+     */
+    public void setNumberOfSides(int numberOfSides) {
+        this.numberOfSides = numberOfSides;
+        double[][] coords = calculateCoordinates(getX(), getY(),
+                radius, numberOfSides);
+        this.xCoordinates = coords[0];
+        this.yCoordinates = coords[1];
+        this.sideLengths = calculateSideLengths(coords[0], coords[1]);
+    }
+
+    /**
+     * Устанавливает радиус описанной окружности
+     * и пересчитывает координаты вершин и длины сторон.
+     *
+     * @param radius новый радиус
+     */
+    public void setRadius(double radius) {
+        this.radius = radius;
+        double[][] coords = calculateCoordinates(getX(), getY(),
+                radius, numberOfSides);
+        this.xCoordinates = coords[0];
+        this.yCoordinates = coords[1];
+        this.sideLengths = calculateSideLengths(coords[0], coords[1]);
+    }
+
+    /**
+     * Возвращает количество сторон.
+     *
+     * @return количество сторон
+     */
+    public int getNumberOfSides() {
+        return numberOfSides;
+    }
+
+    /**
+     * Возвращает радиус описанной окружности.
+     *
+     * @return радиус
+     */
+    public double getRadius() {
+        return radius;
+    }
+
+    /**
+     * Возвращает флаг выпуклости.
+     *
+     * @return true, если выпуклый
+     */
+    public boolean isConvex() {
+        return isConvex;
     }
 
     /**
@@ -158,23 +241,5 @@ public class Polygon extends Figure {
             sides[i] = Math.sqrt(dx * dx + dy * dy);
         }
         return sides;
-    }
-
-    /**
-     * Количество сторон.
-     *
-     * @return количество сторон
-     */
-    public int getNumberOfSides() {
-        return numberOfSides;
-    }
-
-    /**
-     * Флаг выпуклости.
-     *
-     * @return true, если выпуклый
-     */
-    public boolean isConvex() {
-        return isConvex;
     }
 }

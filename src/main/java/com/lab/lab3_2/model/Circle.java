@@ -8,10 +8,14 @@ package com.lab.lab3_2.model;
  */
 public class Circle extends Figure {
 
-    /** Количество сторон круга. */
+    /**
+     * Количество сторон круга.
+     */
     private static final int SIDE_COUNT = 0;
 
-    /** Радиус круга. */
+    /**
+     * Радиус круга.
+     */
     private double radius;
 
     /**
@@ -58,6 +62,16 @@ public class Circle extends Figure {
     @Override
     public int getSideCount() {
         return SIDE_COUNT;
+    }
+
+    /**
+     * Возвращает информацию о параметрах круга.
+     *
+     * @return строка с радиусом
+     */
+    @Override
+    public String getParamsInfo() {
+        return "Радиус: " + getRadius();
     }
 
     /**

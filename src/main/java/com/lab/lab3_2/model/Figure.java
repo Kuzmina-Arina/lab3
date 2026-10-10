@@ -12,20 +12,46 @@ import java.util.List;
  */
 public abstract class Figure {
 
-    /** Уникальный идентификатор фигуры. */
+    /**
+     * Уникальный идентификатор фигуры.
+     */
     private int id;
 
-    /** Название фигуры. */
+    /**
+     * Название фигуры.
+     */
     private String name;
 
-    /** Координата X центра фигуры. */
+    /**
+     * Координата X центра фигуры.
+     */
     private double x;
 
-    /** Координата Y центра фигуры. */
+    /**
+     * Координата Y центра фигуры.
+     */
     private double y;
 
-    /** Описание фигуры. */
+    /**
+     * Описание фигуры.
+     */
     private String description;
+
+    /**
+     * Коллекция фигур.
+     */
+    private static List<Figure> figures = new ArrayList<>();
+
+    /**
+     * Конструктор по умолчанию.
+     */
+    public Figure() {
+        this.id = 0;
+        this.name = "";
+        this.x = 0;
+        this.y = 0;
+        this.description = "";
+    }
 
     /**
      * Конструктор для создания фигуры.
@@ -66,6 +92,13 @@ public abstract class Figure {
     public abstract int getSideCount();
 
     /**
+     * Возвращает информацию о параметрах фигуры.
+     *
+     * @return строка с параметрами
+     */
+    public abstract String getParamsInfo();
+
+    /**
      * Возвращает полную информацию о фигуре.
      *
      * @return строка с полной информацией
@@ -74,7 +107,8 @@ public abstract class Figure {
         return "ID: " + id
                 + ", Название: " + name
                 + ", Координаты центра: (" + x + ", " + y + ")"
-                + ", Описание: " + description;
+                + ", Описание: " + description
+                + ", " + getParamsInfo();
     }
 
     /**
@@ -138,6 +172,30 @@ public abstract class Figure {
     }
 
     /**
+     * Создаёт коллекцию дефолтных фигур: по 2 каждого вида.
+     */
+    public static void initDefaultFigures() {
+        figures.clear();
+
+        figures.add(new Circle(1, "Круг-1", 0, 0, "Дефолтный круг", 5));
+        figures.add(new Circle(2, "Круг-2", 1, 1, "Дефолтный круг", 3));
+
+        figures.add(new Triangle(3, "Треугольник-1", 0, 0, "Дефолтный",
+                3, 4, 5));
+        figures.add(new Triangle(4, "Треугольник-2", 2, 2, "Дефолтный",
+                6, 8, 10));
+
+        figures.add(new Polygon(5, "Многоугольник-1", 0, 0, "Дефолтный",
+                6, new double[]{1, 1, 1, 1, 1, 1},
+                new double[]{0, 1, 2, 2, 1, 0},
+                new double[]{0, 0, 1, 2, 2, 1}, true, 1.0));
+        figures.add(new Polygon(6, "Многоугольник-2", 5, 5, "Дефолтный",
+                7, new double[]{1, 1, 1, 1, 1, 1, 1},
+                new double[]{0, 1, 2, 3, 2, 1, 0},
+                new double[]{0, 0, 1, 2, 3, 3, 2}, true, 1.5));
+    }
+
+    /**
      * Устанавливает новое название фигуры.
      *
      * @param name новое название
@@ -171,6 +229,15 @@ public abstract class Figure {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Устанавливает коллекцию фигур.
+     *
+     * @param figures коллекция
+     */
+    public static void setFigures(List<Figure> figures) {
+        Figure.figures = figures;
     }
 
     /**
@@ -216,5 +283,14 @@ public abstract class Figure {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Возвращает коллекцию фигур.
+     *
+     * @return коллекция
+     */
+    public static List<Figure> getFigures() {
+        return figures;
     }
 }
