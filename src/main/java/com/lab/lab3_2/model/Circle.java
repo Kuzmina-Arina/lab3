@@ -17,6 +17,14 @@ public class Circle extends Figure {
      * Радиус круга.
      */
     private double radius;
+    
+    /**
+     * Конструктор по умолчанию
+     */
+    public Circle(){
+        super();
+        this.radius = 0;
+    }
 
     /**
      * Конструктор для создания круга.

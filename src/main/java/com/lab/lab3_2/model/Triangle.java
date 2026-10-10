@@ -27,6 +27,16 @@ public class Triangle extends Figure {
      * Сторона C.
      */
     private double sideC;
+    
+    /**
+     * Конструктор по умолчанию
+     */
+    public Triangle(){
+        super();
+        this.sideA = 0;
+        this.sideB = 0;
+        this.sideC = 0;
+    }
 
     /**
      * Конструктор для создания треугольника.

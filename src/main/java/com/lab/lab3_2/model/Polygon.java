@@ -11,7 +11,7 @@ public class Polygon extends Figure {
     /**
      * Минимальное количество сторон.
      */
-    private static final int MIN_POLYGON_SIDES = 3;
+    private static final int MIN_POLYGON_SIDES = 4;
 
     /**
      * Делитель в формуле шнуровки.
@@ -47,6 +47,20 @@ public class Polygon extends Figure {
      * Флаг выпуклости.
      */
     private boolean isConvex;
+    
+     /**
+     * Конструктор по умолчанию.
+     
+     */
+    public Polygon() {
+        super();
+        this.numberOfSides = 4;
+        this.sideLengths = new double[0];
+        this.xCoordinates = new double[0];
+        this.yCoordinates = new double[0];
+        this.radius = 0;
+        this.isConvex = false;
+    }
 
     /**
      * Конструктор.
